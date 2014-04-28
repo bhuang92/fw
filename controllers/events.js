@@ -108,6 +108,8 @@ function getFoodVenues(req, callback) {
 	if (req.user) { // check that preferences have bene filled
 		food = req.user.foodPreference.query;
 	}
+
+	console.log(food);
 	var venues1 = [], venues2 = [];
 
 	async.parallel([
@@ -116,8 +118,7 @@ function getFoodVenues(req, callback) {
 				for(var i=0; i < foodVenues.response.venues.length; i++) {
 					venues1.push(foodVenues.response.venues[i].id);
 				}
-				console.log(venues1.length);
-
+				
 				cback(null, 1);
 			});
 		},
@@ -126,8 +127,6 @@ function getFoodVenues(req, callback) {
 				for(var i=0; i < foodVenues.response.venues.length; i++) {
 					venues2.push(foodVenues.response.venues[i].id);
 				}
-
-				console.log(venues2.length);
 
 				cback(null, 2);
 			});
@@ -243,19 +242,29 @@ function sortVenues(cache, idList, user) {
 // visitedVenues should be an array of IDs
 function filterVenues(venueList, user) {
 
-	console.log(venueList.length);
+	// console.log(venueList.length);
 	var visitedVenues = [];
 	if (user) {
 		visitedVenues = user.venueHistory.visited;
 	}
 
-	console.log(visitedVenues.length);
-
-	return _.filter(venueList, function(venue) {
+	filter1 = _.filter(venueList, function(venue) {
 		return (visitedVenues.indexOf(venue.id) == -1) && isTimeWithinRange(TIME_FILTER, getTodaysHours(venue)) && inPriceRange(venue, user);
 	});
-};
 
+
+	if (filter1.length == 0) {
+		visitedVenues = [];
+		user.venueHistory.visited = [];
+		user.save();
+		return _.filter(venueList, function(venue) {
+			return (visitedVenues.indexOf(venue.id) == -1) && isTimeWithinRange(TIME_FILTER, getTodaysHours(venue));
+		});
+	}
+	return filter1;
+
+};
+ 
 function filterHistoryDuplicates(venueList, user) {
 	var visitedVenues = [];
 	if (user) {
@@ -381,7 +390,23 @@ exports.getEvents = function(req, res) {
 		var foodList = sortVenues(cache.foodCache, foodIDs, req.user);
 		var eventList = sortVenues(cache.eventCache, eventIDs, req.user);
 
-		console.log("NUMBER IN HERE ACTUALLY");
+		if (!req.user) {
+			var rand_index = Math.floor(Math.random() * Math.min(foodList.length, 7));
+			var rand_index2 = Math.floor(Math.random() *Math.min(eventList.length, 7));
+
+			console.log(rand_index, rand_index2);
+
+			food = foodList[rand_index];
+			events = eventList[rand_index2];
+			foodList.splice(rand_index, 1);
+			eventList.splice(rand_index2, 1);
+
+			foodList.unshift(food);
+			eventList.unshift(events);
+		}
+
+
+		console.log("NUMBER IN HERE AFTER FILTER:");
 		console.log(foodList.length);
 		console.log(eventList.length);
 		if (req.user) { //copy over to Events
@@ -458,36 +483,43 @@ function computeQueries(req) {
 	switch (req.body.timeOfDay) {
 		case "morning":
 			DEFAULT_FOOD = ["4bf58dd8d48988d143941735", "4bf58dd8d48988d16d941735"];
-			TIME_FILTER = "10:00AM";
+			TIME_FILTER = "11:00AM";
 			break;
 		case "night":
-			DEFAULT_FOOD = ["4bf58dd8d48988d10c941735", "4bf58dd8d48988d1ca941735"];
+			var index = Math.floor((Math.random()*3))
+			// english, french, chinese
+			var ethnicChoice = ["52e81612bcbc57f1066b7a05", "4bf58dd8d48988d10c941735", "4bf58dd8d48988d145941735"]
+			DEFAULT_FOOD = [ethnicChoice[index], "4bf58dd8d48988d1ca941735"];
 			TIME_FILTER = "6:00PM";
 			break;
-		default: // afternoon, shouldn't happen
-			DEFAULT_FOOD = ["4d4b7105d754a06374d81259", "52e81612bcbc57f1066b7a05"]; 
+		case "afternoon": // afternoon, shouldn't happen
+			// general, italian
+			DEFAULT_FOOD = ["4d4b7105d754a06374d81259", "4bf58dd8d48988d110941735"]; 
 			TIME_FILTER = "2:00PM";
 			break;
 	}
 
 	if (req.user) {
 		if (req.user.preferences.eventPref == 'New') {
-			req.user.foodPreference.query[1] = "4bf58dd8d48988d149941735";
+			var index = Math.floor((Math.random()*3))
+			// english, french, chinese
+			var ethnicChoice = ["4bf58dd8d48988d10a941735", "4bf58dd8d48988d10d941735", "4bf58dd8d48988d113941735"]
+			req.user.foodPreference.query[0] = ethnicChoice[index];
 		}
 		else {
-			req.user.foodPreference.query[1] = "52e81612bcbc57f1066b7a00";
+			req.user.foodPreference.query[0] = "52e81612bcbc57f1066b7a00";
 		}
 
 		switch (req.user.preferences.placePref) {
 			case "Museum":
-				req.user.eventPreference.query[0] = "4bf58dd8d48988d181941735";
+				req.user.eventPreference.query[2] = "4bf58dd8d48988d181941735";
 				break;
 			case "Comedy":
 				req.user.eventPreference.query[0] = "4bf58dd8d48988d18e941735";
 				req.user.eventPreference.query[1] = "52e81612bcbc57f1066b79e7";
 				break;
 			case "Park":
-				req.user.eventPreference.query[0] = "4d4b7105d754a06377d81259";
+				req.user.eventPreference.query[2] = "4d4b7105d754a06377d81259";
 				break;
 			case "Mall":
 				req.user.eventPreference.query[0] = "4bf58dd8d48988d1fd941735";
@@ -498,13 +530,14 @@ function computeQueries(req) {
 				req.user.foodPreference.query[0] = "4bf58dd8d48988d143941735"; // breakfast spot
 				break;
 			case "night":
-				req.user.foodPreference.query[1] = "4bf58dd8d48988d116941735"; // bar
-				if (req.user.preferences.is21 == "true") {
-					req.user.eventPreference.query[1] = "4d4b7105d754a06376d81259";
+				req.user.foodPreference.query[1] = "4bf58dd8d48988d1cc941735"; // bar
+				if (req.user.preferences.is21 == "Yes") {
+					req.user.eventPreference.query[0] = "4d4b7105d754a06376d81259";
+					req.user.eventPreference.query[1] = "50327c8591d4c4b30a586d5d";
 					req.user.eventPreference.query[2] = "4bf58dd8d48988d121941735"; // nightlife
 				}
 				break;
-			default: // afternoon, shouldn't happen
+			case "afternoon": // afternoon, shouldn't happen
 				req.user.foodPreference.query[0] = "4d4b7105d754a06374d81259"; // general food
 				break;
 		}
