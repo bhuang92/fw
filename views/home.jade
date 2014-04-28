@@ -1,0 +1,23 @@
+extends layout
+
+block content
+	.text-center.grad-background
+		.input-group-center
+			.row#home-row
+				h2 Want to explore Chicago but don't have time to plan? Pick when you are free:
+				br
+				form(method="POST", action='/explore',name="timeOfDay", role="form")
+					input(type='hidden', name='_csrf', value=_csrf)
+					.btn-toolbar
+						.col-md-4
+							button.button.btn.btn-time(type='submit', value="morning", name="timeOfDay")
+								.time-icon
+									img(src='/img/morning.png', alt='morning', width='100')
+						.col-md-4
+							button.button.btn.btn-time(type='submit', value="afternoon", name="timeOfDay")
+								.time-icon
+									img(src='/img/afternoon.png', alt='afternoon', width='100')
+						.col-md-4
+							button.button.btn.btn-time(type='submit', value="night", name="timeOfDay")
+								.time-icon
+									img(src='/img/night.png', alt='night', width='100')

@@ -1,0 +1,601 @@
+@import (less) "lib/animate.css";
+@import (less) "lib/font-awesome.min.css";
+@import "lib/bootstrap/bootstrap";
+@import "lib/bootstrap-social";
+
+@font-face {
+  font-family: 'Stalemate';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Stalemate'), local('Stalemate-Regular'), url(../fonts/stalemate.woff) format('woff');
+}
+
+// Scaffolding
+// -------------------------
+html, body {
+  height: 100%;
+}
+
+body {
+  padding-top: 30px;
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -50px;
+  /* Pad bottom by footer height + (optional) extra spacing */
+  padding: 0 0 50px;
+}
+
+#footer {
+  color:white;
+  background-color: transparent;
+  height: 10px;
+  border:none;
+}
+
+.container-fluid {
+  margin:0px;
+  padding:0px;
+}
+
+.chicago-day {
+  background-image: url('../img/chicago-blue.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.chicago-night {
+  background-image: url('../img/chicago-purple.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.col-xs-8, .col-xs-4 {
+  padding:0;
+}
+
+.row {
+  color:white;
+  padding:0 30px 0 30px;
+  margin: 0 0 0 0;
+}
+
+.fancy-font {
+  font-family: 'Stalemate';
+  font-size: 35px;
+}
+
+.white-text {
+  color:white;
+}
+
+// Navbar
+// -------------------------
+
+@navbar-height: 45px;
+
+.navbar-nav .profile-image {
+  width: 30px;
+  height: 30px;
+}
+
+.navbar-brand {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  height: 50px;
+  font-size: large;
+}
+
+.navbar-default {
+  background-color: transparent;
+  font-size: large;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: white;
+}
+
+.navbar-static-top {
+  border-width: 0;
+  margin: -15px 15px -15px 0;
+}
+
+.navbar-nav.navbar-right:last-child  {
+  margin-right: 0px;
+}
+
+.container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+  margin-left: 30px;
+} 
+
+.navbar-default .navbar-nav > li > a {
+  color:white;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color:white;
+}
+
+.dropdown-menu > li > a, .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+  color: white;
+  padding: 5px 0 0 0;
+}
+
+.dropdown-menu > li > a:hover,.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+  color: white;
+  background-color: transparent;
+  padding-top: 5px;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color:white;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: transparent;
+  color:white;
+}
+
+.navbar-toggle {
+  margin-right: 45px;
+  margin-top:10px;
+  color:white;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border: none;
+  float: right;
+  text-align: right;
+  margin-right:15px;
+  padding-right: 0;
+  box-shadow: none;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: transparent;
+}
+
+.dropdown-menu {
+  border:none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+// Social Buttons
+// -------------------------
+
+.btn-social {
+  border-radius: 2px;
+}
+
+// Font Awesome
+// -------------------------
+
+[class^="fa-"],
+[class*="fa-"] {
+  margin-right: 5px;
+}
+
+// API Examples
+// -------------------------
+
+.thumb {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.thumb img {
+  margin-bottom: 5px;
+  margin-right: 5px;
+  opacity: 0.2;
+  transition: opacity 0.2s;
+}
+
+.thumb:hover img {
+  opacity: 1;
+  box-shadow: 0 0 3px 1px @brand-primary;
+}
+
+.facebook-caption {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  color: #fff;
+  padding: 3px;
+  bottom: 25px;
+}
+
+.api-examples {
+  img {
+    padding-right: 10px;
+  }
+}
+
+.jumbotron {
+  margin: 20px 0;
+  background-color: transparent;
+  color:white;
+}
+
+#title {
+  padding-bottom: 10px;
+}
+
+.box {
+  // border-bottom: 2px solid white;
+  padding:30px;
+}
+
+// Home
+// -------------------------
+
+#home-row {
+  margin-top: 75px;
+}
+
+.btn-time {
+  background: transparent;
+  border-color:transparent;
+  border-width:3px;
+  box-shadow: none !important;
+  margin:10px;
+}
+
+.btn-time:hover {
+  border: solid;
+  border-color: white;
+  border-width: 3px;
+  border-radius: 25px;
+}
+
+.btn-toolbar {
+  margin-top: 10px;
+}
+
+// Events
+// -------------------------
+
+#event-list {
+  height:500px;
+  width:100%;
+  background-color: gray;
+  opacity: 0.8;
+}
+
+.btn-clear{
+  margin: 20px 0 20px 0;
+  background-color: transparent;
+  color:white;
+  box-shadow: none;
+  border-color: white;
+}
+
+.btn-clear:hover {
+  margin: 20px 0 20px 0;
+  background-color: transparent;
+  color:white;
+  box-shadow: none;
+  border-color: white;
+  border-width: 2px;
+}
+
+.btn-default {
+  background-image: none;
+}
+
+.btn-icon, .btn-icon:hover {
+  padding-top:0;
+  background-color: transparent;
+  color:white;
+  box-shadow: none;
+  border:none;
+  font-size: x-large;
+}
+
+.btn-refresh, .btn-refresh:hover {
+  padding-top:0;
+  margin: 0 10px 0 10px;
+  height:30px;
+  width:30px;
+  background: url('../img/refresh.png');
+  background-size: cover;
+  box-shadow: none;
+  border:none;
+}
+
+.map-div {
+  margin:15px 15px 15px 0;
+}
+
+.event-text {
+  font-size: x-large;
+}
+
+.detail-text {
+  font-size: large;
+}
+
+.form-group {
+  color:white;
+} 
+
+.btn-link, .btn-link:hover {
+  color:white;
+}
+
+.legend-div {
+  text-align: center;
+  color:white;
+  margin-top:75px;
+  border-bottom: none;
+}
+
+a, a:hover {
+  color:white;
+}
+
+.detail-row {
+  margin:30px 0 30px 0;
+  height: 150px;
+}
+
+.badge-div {
+  position: absolute;
+  right:0;
+  bottom:0;
+}
+
+.badge-indiv {
+  text-align: center;
+  width:80px;
+  height:80px;
+  margin: 0 10px 0 10px;
+}
+
+.icon-div {
+  text-align: center;
+  width:60px;
+  height:60px;
+  float: right;
+  margin: 0 10px 0 10px;
+}
+
+.icon-label {
+  font-size: x-small;
+  padding:0;
+  margin:0;
+}
+
+@media (max-width: 650px) {
+  .detail-row {
+    margin:20px 0 0 0;
+    height:100px;
+    padding:0px; 
+  }
+
+  .event-text {
+    font-size: normal;
+  }
+
+  .detail-text {
+    font-size: small;
+  }
+
+  .badge-div {
+  position: relative;
+  }
+
+  .container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+    margin-left: 15px;
+  } 
+}
+
+// .ename {
+//   background-color: red;
+// }
+
+// .eicons {
+//   background-color: blue;
+// }
+
+
+
+// Account
+// -------------------------
+.profile .page-header {
+  color: white;
+  margin-left: 15px;
+}
+
+.profile .control-label {
+  color: white;
+  width: 160px;
+}
+
+.profile .form-horizontal {
+  margin-left: 25%
+}
+
+.profile .col-sm-4 {
+  width: 50%
+}
+
+.profile .form-horizontal .control-label {
+  text-align: left;
+}
+
+.profile .radio{
+  color: white;
+}
+
+.profile .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.link-list {
+  font-color: black;
+  text-align: center;
+}
+// PreferencesQuiz
+// -------------------------
+.onboard-wrap {
+  color: white;
+  position:fixed;
+  height: 100%;
+  width: 100%;
+  top:0;
+}
+
+.radio-div {
+  color: black;
+}
+
+
+fieldset {
+  text-align: center;
+}
+
+/*form styles*/
+#msform {
+  width: 450px;
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
+  margin-top:125px;
+  height:inherit;
+  float:center;
+}
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  margin: 0 10%;
+  /*stacking fieldsets above each other*/
+  position: absolute;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+  display: none;
+}
+/*inputs*/
+#msform input, #msform textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    color: black;
+    font-size: 13px;
+}
+/*buttons*/
+#msform .action-button {
+    width: 100px;
+    background: #fbcf00;
+    font-weight: bold;
+    color: black;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+
+}
+#msform .action-button:hover, #msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #fbcf00;
+}
+/*headings*/
+.fs-title {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: black;
+    margin-bottom: 10px;
+}
+.fs-subtitle {
+    font-weight: normal;
+    font-size: 15px;
+    color: black;
+    margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+    padding-top: 30px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+#progressbar li {
+    list-style-type: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 15px;
+    width: 16.66%;
+    float: left;
+    position: relative;
+}
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 20px;
+    line-height: 20px;
+    display: block;
+    font-size: 10px;
+    color: white;
+    background: white;
+    border-radius: 3px;
+    margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 5px;
+    background: white;
+    position: absolute;
+    left: -50%;
+    top: 9px;
+    z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+/*connector not needed before the first step*/
+content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+background: #fbcf00;
+color: black;
+}
+
+
+/* Profile page nonsense */
+.page-header {
+  border: none;
+}
+
+// h3 {
+//   margin-left: 240px;
+// }
