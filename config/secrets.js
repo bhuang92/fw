@@ -26,8 +26,8 @@ module.exports = {
   facebook: {
     clientID: process.env.FACEBOOK_ID || '674823265912761',
     clientSecret: process.env.FACEBOOK_SECRET || '2c827d214f37d3b459a94a1d5bc85509',
-    // callbackURL: 'http://onedayinchicago.herokuapp.com/auth/facebook/callback',
-    callbackURL: 'http://localhost:3000/auth/facebook/callback',
+    callbackURL: 'http://onedayinchicago.herokuapp.com/auth/facebook/callback',
+    // callbackURL: 'http://localhost:3000/auth/facebook/callback',
     passReqToCallback: true
   },
 
@@ -93,8 +93,8 @@ module.exports = {
   foursquare: {
     clientId: process.env.FOURSQUARE_ID || '1S5ZWDKVMROVPLY0MELI23DS2DTNWGCINXW1FPAVUX3Y5SH2',
     clientSecret: process.env.FOURSQUARE_SECRET || 'GDOTZTHVDEMB1C0PAEN3LRCJQJR0XSMWEZM1W5QJI4AZLRLY',
-    // redirectUrl: process.env.FOURSQUARE_REDIRECT_URL || 'http://onedayinchicago.herokuapp.com/auth/foursquare/callback'
-    redirectUrl: process.env.FOURSQUARE_REDIRECT_URL || 'http://localhost:3000/auth/foursquare/callback'
+    redirectUrl: process.env.FOURSQUARE_REDIRECT_URL || 'http://onedayinchicago.herokuapp.com/auth/foursquare/callback'
+    // redirectUrl: process.env.FOURSQUARE_REDIRECT_URL || 'http://localhost:3000/auth/foursquare/callback'
   },
 
   venmo: {
