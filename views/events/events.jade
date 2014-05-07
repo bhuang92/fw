@@ -91,7 +91,7 @@ block content
 					button.button.btn.btn-default.btn-lg.btn-clear(type='submit', formaction='/save-link-#{EventsID}') Save
 				else
 					| Log in to save.
-				a.pull-right.button.btn.btn-default.btn-lg.btn-clear(type='submit' href="mailto:?subject=Join me on this trip!&body=Hi!%0D%0A%0D%0AI want you to come with me to #{eventLocation[0].name} and #{foodLocation[0].name}.%0D%0A%0D%0AMore info: http://onedayinchicago.herokuapp.com/save-link-#{EventsID}") Share
+				a.pull-right.button.btn.btn-default.btn-lg.btn-clear(type='submit', href="mailto:?subject=Join me on this trip!&body=Hi!%0D%0A%0D%0AI want you to come with me to #{eventLocation[0].name} and #{foodLocation[0].name}.%0D%0A%0D%0AMore info: http://onedayinchicago.herokuapp.com/save-link-#{EventsID}") Share
 	script(type='text/javascript').
 		$(document).ready(function(){
 			//Check if browser supports W3C Geolocation API
